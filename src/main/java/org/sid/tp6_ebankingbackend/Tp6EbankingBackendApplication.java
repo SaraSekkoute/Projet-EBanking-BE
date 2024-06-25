@@ -32,7 +32,7 @@ public class Tp6EbankingBackendApplication {
 		SpringApplication.run(Tp6EbankingBackendApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(BankAccountService bankAccountService)
 	{
 

@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.awt.print.Pageable;
 import java.util.Date;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 //for logger
 @Slf4j
+@CrossOrigin("*")
 public class BankAccountServiceImpl implements BankAccountService{
 //   @Autowired
     private CustomerRepository customerRepository;
@@ -270,8 +272,13 @@ Page<AccountOperation> accountOperations= accountOperationRepository.findByBankA
  return  accountHistoryDTO;
     }
 
-
-
+    @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customers=customerRepository.findByNameContains(keyword);
+//        List<Customer> customers=customerRepository. searchCustomer(keyword);
+        List<CustomerDTO> customersDTO= customers.stream().map(customer -> dtoMapper.fromCustomer(customer)).collect(Collectors.toList());
+      return customersDTO;
+    }
 
 
 //==>web
