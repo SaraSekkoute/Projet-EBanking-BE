@@ -17,9 +17,10 @@ public class Customer {
 
     private String email;
 
-    @OneToMany(mappedBy = "customer" )
+
 
 //You don’t necessarily need to consult the list of accounts(that is api that makes the serialize json (jakson library that converts object java on json) it is not worth serializing this attributes (bankAccountList) ignore the reading )
+    @OneToMany(mappedBy = "customer" )
     @JsonProperty(access =JsonProperty.Access.WRITE_ONLY )
     private List<BankAccount> bankAccountList;
 
